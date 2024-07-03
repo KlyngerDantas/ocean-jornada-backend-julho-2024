@@ -13,4 +13,11 @@ const lista = ['Rick Sanchez', 'Morty Smith', 'Summer Smith']
 app.get('/item', function (req, res) {
   res.send(lista)
 })
+app.use(express.json())
+// Create - [POST] /Item
+app.post('/item', function (req, res) {
+  console.log(req.body)
+  res.send('Create')
+
+})
 app.listen(3000)
