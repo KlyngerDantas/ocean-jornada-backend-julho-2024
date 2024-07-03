@@ -15,9 +15,17 @@ app.get('/item', function (req, res) {
 })
 app.use(express.json())
 // Create - [POST] /Item
-app.post('/item', function (req, res) {
+app.post('/item',function(req, res) {
+  // Obtemos o nome enviado no request Body
   console.log(req.body)
+  const item = req.body.nome
+
+  // Inserimos o item no final da ista
+  lista.push(item)
+  console.log(item)
   res.send('Create')
 
+  res.send('Item cirado com sucesso!')
 })
+
 app.listen(3000)
