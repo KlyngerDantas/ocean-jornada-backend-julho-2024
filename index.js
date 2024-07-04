@@ -27,5 +27,7 @@ app.post('/item',function(req, res) {
 
   res.send('Item cirado com sucesso!')
 })
-
+app.get('/item/:id', function(req, res){
+  res.send('Read By ID')
+}
 app.listen(3000)
