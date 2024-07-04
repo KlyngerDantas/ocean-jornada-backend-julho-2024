@@ -27,7 +27,11 @@ app.post('/item',function(req, res) {
 
   res.send('Item cirado com sucesso!')
 })
-app.get('/item/:id', function(req, res){
-  res.send('Read By ID')
+app.get('/item/:id',function(req, res){
+  //res.send('Read By ID')
+  const id = req.params.id
+  console.log(id)
+  const item = lista[id - 1]
+  res.send(item)
 })
 app.listen(3000)
