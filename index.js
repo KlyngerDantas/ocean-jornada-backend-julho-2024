@@ -5,33 +5,60 @@ app.get('/', function (req, res) {
   res.send('Hello World')
 })
 
+// Desafio: criar endpoint /oi que exibe "Olá, mundo!"
+app.get('/oi', function (req, res) {
+  res.send('Olá, mundo!')
+})
 
-// Lista de personagem
+// Lista de Personagens
 const lista = ['Rick Sanchez', 'Morty Smith', 'Summer Smith']
 
-// Read Al - [gGET]
+// Read All - [GET] /item
 app.get('/item', function (req, res) {
+  // Pegamos a lista e enviamos como resposta HTTP
   res.send(lista)
 })
+
+// Sinalizamos para o Express que vamos usar JSON no Body
 app.use(express.json())
-// Create - [POST] /Item
-app.post('/item',function(req, res) {
-  // Obtemos o nome enviado no request Body
-  console.log(req.body)
+
+// Create - [POST] /item
+app.post('/item', function (req, res) {
+  // Obtemos o nome enviado no Request Body
   const item = req.body.nome
 
-  // Inserimos o item no final da ista
+  // Inserimos o item no final da lista
   lista.push(item)
-  console.log(item)
-  res.send('Create')
 
-  res.send('Item cirado com sucesso!')
+  // Enviamos uma mensagem de sucesso!
+  res.send('Item criado com sucesso!')
 })
-app.get('/item/:id',function(req, res){
-  //res.send('Read By ID')
+
+// Read By Id - [GET] /item/:id
+app.get('/item/:id', function (req, res) {
+  // Acessamos o parâmetro de rota ID
   const id = req.params.id
-  console.log(id)
+
+  // Acessamos o item na lista pelo índice corrigido (id - 1)
   const item = lista[id - 1]
+
+  // Enviamos o item obtido como resposta
   res.send(item)
 })
+
+// Update - [PUT] /item/:id
+app.put('/item/:id', function (req, res) {
+  // Acessamos o ID do parâmetro de rota
+  const id = req.params.id
+
+  // Acessamos o novoItem no body da requisição
+  const novoItem = req.body.nome
+
+  // Atualizamos a lista com a nova informação
+  lista[id - 1] = novoItem
+
+  // Enviamos uma mensagem de sucesso
+  res.send('Item atualizado com sucesso: ' + id)
+})
+
 app.listen(3000)
